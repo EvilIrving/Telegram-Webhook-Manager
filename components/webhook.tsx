@@ -64,7 +64,6 @@ const WebhookPage = () => {
     <section className="p-6 max-w-screen-md mx-auto my-20">
       <h1 className="text-2xl font-bold mb-4">Webhook Manager</h1>
       <p className="mb-4">Manage your telegram bot webhook.</p>
-
       <div className="mb-4">
         <Label htmlFor="token" className="block text-sm font-medium mb-1">
           Token:
@@ -76,6 +75,10 @@ const WebhookPage = () => {
           onChange={(e) => setToken(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <p className="mb-4 text-sm text-gray-500">
+          The bot tokens you enter are stored in your browser and used only in
+          requests made directly to Telegram.
+        </p>
       </div>
 
       <div className="mb-4">
