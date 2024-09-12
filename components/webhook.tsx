@@ -63,7 +63,7 @@ const WebhookPage = () => {
   return (
     <section className="p-6 max-w-screen-md mx-auto">
       <h1 className="text-2xl font-bold mb-4">Webhook Manager</h1>
-      <p className="mb-4">Manage your telegram bot's webhook.</p>
+      <p className="mb-4">Manage your telegram bot webhook.</p>
 
       <div className="mb-4">
         <Label htmlFor="token" className="block text-sm font-medium mb-1">
