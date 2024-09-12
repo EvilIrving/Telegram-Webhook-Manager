@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { Label } from "@/components/ui/label";
 
 // Set up webhook URL.
-// https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/setWebhook?url=https://telegram-bot-vercel-boilerplate-sigma-eight.vercel.app/
+// https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/setWebhook?url=https://whisper.cain-wuyi.workers.dev/
 
 // delete webhook URL.
 // https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/deleteWebhook
@@ -15,10 +16,6 @@ import { useToast } from "@/hooks/use-toast";
 
 // get updates.
 // https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/getUpdates
-
-
-
-
 
 const WebhookPage = () => {
   const { toast } = useToast();
@@ -54,19 +51,34 @@ const WebhookPage = () => {
 
   return (
     <section>
-      <div className="flex gap-4 items-center flex-col sm:flex-row">
-        <Input
-          type="text"
-          placeholder="Bot Token"
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="Webhook url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
+
+ 
+ 
+
+      <div className="flex gap-4 items-center">
+        <div>
+          <Label htmlFor="token">Bot Token</Label>
+          <Input
+            id="token"
+            type="text"
+            placeholder="Bot Token"
+            value={token}
+            onChange={(e) => setToken(e.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="url">Webhook URL</Label>
+          <Input
+            id="url"
+            type="text"
+            placeholder="Webhook url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-4 mt-4">
         <Button variant="secondary" onClick={() => setupWebhookUrl()}>
           Set up webhook
         </Button>
