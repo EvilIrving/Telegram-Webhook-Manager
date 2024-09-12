@@ -11,4 +11,5 @@ Webhook manager is a simple tool to manage webhooks. It allows you to create, ed
 
 ## Looks like this:
 
-![webhook-manager screenshot](https://smms.app/image/sVdjk63JgmN4ael)
+<!-- ![webhook-manager screenshot](https://smms.app/image/sVdjk63JgmN4ael) -->
+![webhook-manager screenshot](./Snipaste.png)
