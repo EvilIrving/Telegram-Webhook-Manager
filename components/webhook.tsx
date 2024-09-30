@@ -46,8 +46,8 @@ const WebhookPage = () => {
     if (ok) {
       setStatus(description);
       toast({
-        title: "Webhook Set Up",
-        description: "Webhook has been set up successfully.",
+        title: "Webhook Deleted",
+        description: "Webhook has been deleted.",
       });
     }
   };
