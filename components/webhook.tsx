@@ -72,6 +72,16 @@ const WebhookPage = () => {
     }
   };
 
+  const [updates, setUpdates] = useState(null);
+  const getUpdates = async () => {
+    const path = `https://api.telegram.org/bot${token}/getUpdates`;
+    const response = await fetch(path);
+    const { ok, result } = await response.json();
+    if (ok) {
+      setUpdates(result);
+    }
+  };
+
   return (
     <section className="p-6 max-w-screen-md mx-auto my-20">
       <h1 className="text-2xl font-bold mb-4">Webhook Manager</h1>
@@ -131,6 +141,12 @@ const WebhookPage = () => {
         >
           Get Me
         </button>
+        <button
+          onClick={getUpdates}
+          className="px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          Get Updates
+        </button>
       </div>
 
       <div className="text-left">
@@ -145,6 +161,15 @@ const WebhookPage = () => {
           <h2 className="text-lg font-medium mb-2">Webhook Information</h2>
           <pre className="p-4 bg-gray-100 rounded">
             {JSON.stringify(webhookInfo, null, 2)}
+          </pre>
+        </div>
+      )}
+
+      {updates && (
+        <div className="mt-4">
+          <h2 className="text-lg font-medium mb-2">Updates</h2>
+          <pre className="p-4 bg-gray-100 rounded">
+            {JSON.stringify(updates, null, 2)}
           </pre>
         </div>
       )}
