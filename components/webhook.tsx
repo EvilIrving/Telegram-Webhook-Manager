@@ -17,11 +17,13 @@ import { Label } from "@/components/ui/label";
 // get updates.
 // https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/getUpdates
 
+// get me
+// https://api.telegram.org/bot<BOT_TOKEN>/getMe
 const WebhookPage = () => {
   const { toast } = useToast();
 
-  const [token, setToken] = useState(" ");
-  const [url, setUrl] = useState(" ");
+  const [token, setToken] = useState("");
+  const [url, setUrl] = useState("");
   const [status, setStatus] = useState("Not Set Up");
   const setupWebhookUrl = async () => {
     const path = `https://api.telegram.org/bot${token}/setWebhook?url=${url}`;
@@ -60,6 +62,16 @@ const WebhookPage = () => {
     }
   };
 
+  // const [me, setMe] = useState(null);
+  const getMe = async () => {
+    const path = `https://api.telegram.org/bot${token}/getMe`;
+    const response = await fetch(path);
+    const { ok, result } = await response.json();
+    if (ok) {
+      setWebhookInfo(result);
+    }
+  };
+
   return (
     <section className="p-6 max-w-screen-md mx-auto my-20">
       <h1 className="text-2xl font-bold mb-4">Webhook Manager</h1>
@@ -72,7 +84,7 @@ const WebhookPage = () => {
           type="text"
           id="token"
           value={token}
-          onChange={(e) => setToken(e.target.value)}
+          onChange={(e) => setToken(e.target.value.trim())}
           className="w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <p className="mb-4 text-sm text-gray-500">
@@ -89,7 +101,7 @@ const WebhookPage = () => {
           type="text"
           id="url"
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => setUrl(e.target.value.trim())}
           className="w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -112,6 +124,12 @@ const WebhookPage = () => {
           className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           Get Info
+        </button>
+        <button
+          onClick={getMe}
+          className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+        >
+          Get Me
         </button>
       </div>
 
