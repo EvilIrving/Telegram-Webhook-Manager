@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
+import { get } from "http";
 
 // Set up webhook URL.
 // https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/setWebhook?url=https://whisper.cain-wuyi.workers.dev/
@@ -26,6 +27,9 @@ const WebhookPage = () => {
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState("Not Set Up");
   const setupWebhookUrl = async () => {
+    // 清空 updates 
+   if (updates) setUpdates(null);
+
     const path = `https://api.telegram.org/bot${token}/setWebhook?url=${url}`;
     const response = await fetch(path);
 
@@ -45,6 +49,7 @@ const WebhookPage = () => {
     const { ok, description } = await response.json();
     if (ok) {
       setStatus(description);
+      getWebhookInfo();
       toast({
         title: "Webhook Deleted",
         description: "Webhook has been deleted.",
@@ -74,6 +79,11 @@ const WebhookPage = () => {
 
   const [updates, setUpdates] = useState(null);
   const getUpdates = async () => {
+    // 先删除 webhook 再获取 updates
+    await deleteWebhookUrl();
+    setWebhookInfo(null);
+
+    // 更新 updates 
     const path = `https://api.telegram.org/bot${token}/getUpdates`;
     const response = await fetch(path);
     const { ok, result } = await response.json();
