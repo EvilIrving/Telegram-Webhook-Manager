@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
-import { get } from "http";
+ 
 
 // Set up webhook URL.
 // https://api.telegram.org/bot7545670078:AAG4TbRdtCabbUbER_4vVfTIbdkykzTHSfo/setWebhook?url=https://whisper.cain-wuyi.workers.dev/
@@ -23,8 +23,8 @@ import { get } from "http";
 const WebhookPage = () => {
   const { toast } = useToast();
 
-  const [token, setToken] = useState("");
-  const [url, setUrl] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("botToken") || "");
+  const [url, setUrl] = useState(localStorage.getItem("botUrl") || "");
   const [status, setStatus] = useState("Not Set Up");
   const setupWebhookUrl = async () => {
     // 清空 updates 
@@ -92,6 +92,12 @@ const WebhookPage = () => {
     }
   };
 
+  // save to local storage 
+  const saveToLocalStorage = () => {
+    // 如果本地存在，则进行修改，否则进行添加
+    localStorage.setItem("botToken", token);
+    localStorage.setItem("botUrl", url);
+  };
   return (
     <section className="p-6 max-w-screen-md mx-auto my-20">
       <h1 className="text-2xl font-bold mb-4">Webhook Manager</h1>
@@ -156,6 +162,13 @@ const WebhookPage = () => {
           className="px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500"
         >
           Get Updates
+        </button>
+
+        <button
+          onClick={saveToLocalStorage}
+          className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        >
+          Save to Local Storage
         </button>
       </div>
 
