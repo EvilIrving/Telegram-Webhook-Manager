@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -23,8 +23,15 @@ import { Label } from "@/components/ui/label";
 const WebhookPage = () => {
   const { toast } = useToast();
 
-  const [token, setToken] = useState(localStorage.getItem("botToken") || "");
-  const [url, setUrl] = useState(localStorage.getItem("botUrl") || "");
+  const [token, setToken] = useState("");
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    // 在客户端加载时从 localStorage 获取数据
+    setToken(localStorage.getItem("botToken") || "");
+    setUrl(localStorage.getItem("botUrl") || "");
+  }, []);
+
   const [status, setStatus] = useState("Not Set Up");
   const setupWebhookUrl = async () => {
     // 清空 updates 
