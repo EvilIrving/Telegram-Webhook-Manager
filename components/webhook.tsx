@@ -20,6 +20,8 @@ import { Label } from "@/components/ui/label";
 
 // get me
 // https://api.telegram.org/bot<BOT_TOKEN>/getMe
+
+// TODO 增加管理多个 webhook 的功能， 可以切换 token 和 webhook url
 const WebhookPage = () => {
   const { toast } = useToast();
 
