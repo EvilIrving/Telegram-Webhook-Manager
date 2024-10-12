@@ -192,8 +192,8 @@ const WebhookPage = () => {
   };
 
   return (
-    <section className="p-6 pt-0 max-w-screen-md mx-auto mb-20">
-      <h1 className="text-2xl font-bold mb-4">Webhook 管理器</h1>
+    <section className="p-4 sm:p-6 pt-0 max-w-screen-md mx-auto mb-20">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4">Webhook 管理器</h1>
 
       <div className="mb-4">
         <Label
@@ -202,15 +202,15 @@ const WebhookPage = () => {
         >
           新配置名称：
         </Label>
-        <div className="flex">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Input
             type="text"
             id="newConfigName"
             value={newConfigName}
             onChange={(e) => setNewConfigName(e.target.value)}
-            className="flex-grow mr-2"
+            className="flex-grow"
           />
-          <Button onClick={addNewConfig}>添加新配置</Button>
+          <Button onClick={addNewConfig} className="w-full sm:w-auto">添加新配置</Button>
         </div>
       </div>
 
@@ -286,23 +286,13 @@ const WebhookPage = () => {
             />
           </div>
 
-          <div className="flex justify-start gap-6 items-center mb-4">
-            <Button onClick={setupWebhookUrl}>设置</Button>
-            <Button onClick={deleteWebhookUrl} variant="destructive">
-              删除
-            </Button>
-            <Button onClick={getWebhookInfo} variant="outline">
-              获取信息
-            </Button>
-            <Button onClick={getMe} variant="outline">
-              获取 Me
-            </Button>
-            <Button onClick={getUpdates} variant="outline">
-              获取更新
-            </Button>
-            <Button onClick={deleteCurrentConfig} variant="destructive">
-              删除当前配置
-            </Button>
+          <div className="flex flex-wrap justify-start gap-2 sm:gap-4 items-center mb-4">
+            <Button onClick={setupWebhookUrl} className="w-full sm:w-auto">设置</Button>
+            <Button onClick={deleteWebhookUrl} variant="destructive" className="w-full sm:w-auto">删除</Button>
+            <Button onClick={getWebhookInfo} variant="outline" className="w-full sm:w-auto">获取信息</Button>
+            <Button onClick={getMe} variant="outline" className="w-full sm:w-auto">获取 Me</Button>
+            <Button onClick={getUpdates} variant="outline" className="w-full sm:w-auto">获取更新</Button>
+            <Button onClick={deleteCurrentConfig} variant="destructive" className="w-full sm:w-auto">删除当前配置</Button>
           </div>
 
           <div className="text-left">
